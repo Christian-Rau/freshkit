@@ -1,0 +1,30 @@
+{
+  "name": "freshkit",
+  "version": "0.5.0",
+  "description": "This command-line tool automates the setup process for a new SvelteKit project, including the installation of Tailwind CSS and the creation of a basic file structure necessary for using SvelteKit's \"Advanced routing and layouts\"",
+  "main": "create-project.js",
+  "type": "module",
+  "bin": {
+    "freshkit": "bin/create-project.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christian-Rau/freshkit.git"
+  },
+  "keywords": [
+    "svelte",
+    "sveltekit",
+    "tailwindcss",
+    "advanced-layouts",
+    "cli"
+  ],
+  "author": "Christian Rau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Christian-Rau/freshkit/issues"
+  },
+  "homepage": "https://github.com/Christian-Rau/freshkit#readme"
+}

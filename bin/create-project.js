@@ -105,7 +105,11 @@ const { version } = JSON.parse( fs.readFileSync( new URL( '../package.json', imp
     <div class="w-64 bg-white rounded-lg p-4 shadow-lg text-slate-800">
       <img src="https://github.com/Christian-Rau/freshkit/blob/master/assets/bot.png?raw=true" alt="FreshKit Bot">
       <p class="text-xl font-bold  mb-4">Build something great!</p>
-      <p class="text-sm font-bold">If you have any questions, or there is any issues you can visit <a href="https://github.com/Christian-Rau/freshkit" class="underline">https://github.com/Christian-Rau/freshkit</a> for more information. Thank you for using FreshKit</p>
+      <p class="text-sm font-bold">If you have any questions, or there is any issues you can visit <a
+          href="https://github.com/Christian-Rau/freshkit/issues"
+          class="underline">https://github.com/Christian-Rau/freshkit/issues</a> for more information. Thank you for
+        using FreshKit, or check out the <a href="https://github.com/Christian-Rau/freshkit/issues">README</a> for
+        more information.</p>
     </div>
   </div> `);
 
