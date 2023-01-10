@@ -157,7 +157,7 @@ const { version } = JSON.parse(
     const dependencies = 'tailwindcss postcss autoprefixer';
 
     await runCommand(
-      `${ packageManager === "pnpm" ? "pnpm install" : packageManager === "npm" ? "npm install" : "yarn add" } ${ dependencies }`
+      `${ packageManager === "pnpm" ? "pnpm install --save-dev" : packageManager === "npm" ? "npm install --save-dev" : "yarn add --dev" } ${ dependencies }`
     );
 
     runCommand();
@@ -247,7 +247,7 @@ const { version } = JSON.parse(
   }
 
 
-  console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS done!" ) );
+  console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS is installed and setup!" ) );
 
   // if ( useTailwind ) {
   //   setupTailwind();

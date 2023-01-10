@@ -9,10 +9,9 @@ const writeFile = promisify( fs.writeFile );
 const dependencies = 'tailwindcss postcss autoprefixer';
 
 export async function setupTailwind( packageManager ) {
-  await runCommand( `${ packageManager === "pnpm" ? "pnpm install" : packageManager === "npm" ? "npm install" : "yarn add" } ${ dependencies }` );
+  await runCommand( `${ packageManager === "pnpm" ? "pnpm install" : packageManager === "npm" ? "npm install --save-dev" : "yarn add --dev" } ${ dependencies }` );
   // rest of the code
 
-  await runCommand( '' );
   await spawn( 'npx tailwindcss init tailwind.config.cjs -p' );
   console.log( '' );
 
