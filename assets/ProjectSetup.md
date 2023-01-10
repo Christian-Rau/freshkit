@@ -31,3 +31,86 @@ fs.writeFileSync( 'src/routes/(auth)/+layout.svelte', '' );
     console.log( `` );
 
 }
+
+## SvelteKit with Layout Grouping blog example
+
+´´´
+├── src
+│ ├── routes
+│ │ ├── (app)
+│ │ │ ├── +layout.svelte
+│ │ │ ├── +page.svelte
+│ │ │ ├── about
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ └── contact
+│ │ │ ├── +layout.svelte
+│ │ │ └── +page.svelte
+│ │ ├── (blog)
+│ │ │ ├── blog
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ ├── +page.svelte
+│ │ │ │ ├── 2020-01-01-post-title.md
+│ │ │ │ ├── 2020-02-01-another-post-title.md
+│ │ │ │ └── 2020-03-01-yet-another-post-title.md
+│ └── app.css
+´´´
+
+´´´
+├── src
+│ ├── routes
+│ │ ├── (app)
+│ │ │ ├── +layout.svelte
+│ │ │ ├── +page.svelte
+│ │ │ ├── dashboard
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ ├── billing
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ ├── account
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ ├── about
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ ├── contact
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ └── settings
+│ │ │ ├── +layout.svelte
+│ │ │ └── +page.svelte
+│ │ ├── (auth)
+│ │ │ ├── +layout.svelte
+│ │ │ ├── +page.svelte
+│ │ │ ├── auth
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ ├── +page.svelte
+│ │ │ │ ├── signin
+│ │ │ │ │ ├── +layout.svelte
+│ │ │ │ │ └── +page.svelte
+│ │ │ │ └── signup
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ └── forgot-password
+│ │ │ ├── +layout.svelte
+│ │ │ └── +page.svelte
+│ │ └── (admin)
+│ │ ├── +layout.svelte
+│ │ ├── +page.svelte
+│ │ ├── admin
+│ │ │ ├── +layout.svelte
+│ │ │ ├── +page.svelte
+│ │ │ ├── users
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ ├── roles
+│ │ │ │ ├── +layout.svelte
+│ │ │ │ └── +page.svelte
+│ │ │ └── permissions
+│ │ │ ├── +layout.svelte
+│ │ │ └── +page.svelte
+│ │ └── settings
+│ │ ├── +layout.svelte
+│ │ └── +page.svelte
+´´´

@@ -30,6 +30,34 @@ This will prompt you to enter a name for your project and ask if you want to inc
 **Advanced Layouts**
 If you want to use advanced layouts, you can choose to do so when prompted during the installation process. This will create a file structure with additional routes and layouts for your project.
 
+The file structure will look like this:
+
+```bash
+src
+└── routes
+    ├── (app)
+    |   ├── about
+    |   |   └── +page.svelte
+    |   ├── contact
+    |   |   └── +page.svelte
+    |   ├── dashboard
+    |   |   └── +page.svelte
+    ├── admin
+    |   ├── admin
+    |   |   └── +page@.svelte
+    |   └── +layout.svelte
+    ├── +layout.svelte
+    └── (auth)
+        ├── auth
+        |   ├── signin
+        |   |   └── +page.svelte
+        |   ├── signup
+        |   |   └── +page.svelte
+        |   └── +layout.svelte
+        └── +layout.svelte
+
+```
+
 **License**
 This package is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 

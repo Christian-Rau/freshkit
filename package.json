@@ -3,16 +3,17 @@
   "version": "0.5.0",
   "description": "This command-line tool automates the setup process for a new SvelteKit project, including the installation of Tailwind CSS and the creation of a basic file structure necessary for using SvelteKit's \"Advanced routing and layouts\"",
   "main": "create-project.js",
-  "type": "module",
-  "bin": {
-    "freshkit": "bin/create-project.js"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bin/create-project.js",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check .",
+    "prettier:ignore": "prettier --write .prettierignore",
+    "eslint": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Christian-Rau/freshkit.git"
+    "url": "https://github.com/Christian-Rau/freshkit"
   },
   "keywords": [
     "svelte",
@@ -28,8 +29,16 @@
   },
   "homepage": "https://github.com/Christian-Rau/freshkit#readme",
   "dependencies": {
+    "create-svelte": "^2.1.0",
     "kleur": "^4.1.5",
     "path": "^0.12.7",
     "prompts": "^2.4.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.8.2"
   }
 }
