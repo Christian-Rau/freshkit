@@ -249,14 +249,6 @@ const { version } = JSON.parse(
 
   console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS is installed and setup!" ) );
 
-  // if ( useTailwind ) {
-  //   setupTailwind();
-  //   kleur.green( "√" ),
-  //     kleur.yellow( "Setting up Tailwind CSS..." );
-  //   setupTailwind( packageManager );
-  //   console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS done!" ) );
-  // }
-
   const { layoutSaas } = await prompts( {
     type: "confirm",
     name: "layoutSaas",
