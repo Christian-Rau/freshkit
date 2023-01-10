@@ -1,129 +1,42 @@
-const fs = require("fs");
+import fs from 'fs';
 
-const createDirectory = (path) => {
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+export function layoutSaas() {
+  const routesPath = "src/routes";
+  const appPath = `${ routesPath }/(app)`;
+  const appRoutes = [ "about", "contact", "dashboard" ];
+  const adminPath = `${ routesPath }/admin`;
+  const authPath = `${ routesPath }/(auth)`;
+  const authRoutes = [ "auth/signin", "auth/signup" ];
+  const pages = [ "page", "layout" ];
+  const fileExt = ".svelte";
+
+  console.log( "Setting up groups..." );
+
+  // Create main routes
+  fs.mkdirSync( appPath );
+  fs.mkdirSync( adminPath );
+  fs.mkdirSync( authPath );
+
+  // Create sub routes
+  appRoutes.forEach( createRoutesWithPages( appPath, pages, fileExt ) );
+  authRoutes.forEach( createRoutesWithPages( authPath, pages, fileExt ) );
+
+  // Create admin pages
+  pages.forEach( createPage( adminPath, fileExt ) );
+}
+
+function createRoutesWithPages( path, pages, fileExt ) {
+  return function ( route ) {
+    const routePath = `${ path }/${ route }`;
+    fs.mkdirSync( routePath );
+    pages.forEach( createPage( routePath, fileExt ) );
   }
-};
+}
 
-const createFile = (path, contents) => {
-  fs.writeFileSync(path, contents);
-};
+function createPage( path, fileExt ) {
+  return function ( page ) {
+    fs.writeFileSync( `${ path }/ +${ page }${ fileExt }`, "" );
+  }
+}
 
-const routes = [
-  {
-    name: "(app)",
-    children: [
-      {
-        name: "dashboard",
-        children: [],
-      },
-      {
-        name: "billing",
-        children: [],
-      },
-      {
-        name: "account",
-        children: [],
-      },
-      {
-        name: "about",
-        children: [],
-      },
-      {
-        name: "contact",
-        children: [],
-      },
-      {
-        name: "settings",
-        children: [],
-      },
-    ],
-  },
-  {
-    name: "(auth)",
-    children: [
-      {
-        name: "auth",
-        children: [
-          {
-            name: "signin",
-            children: [],
-          },
-          {
-            name: "signup",
-            children: [],
-          },
-        ],
-      },
-      {
-        name: "forgot-password",
-        children: [],
-      },
-    ],
-  },
-  {
-    name: "(admin)",
-    children: [
-      {
-        name: "admin",
-        children: [
-          {
-            name: "users",
-            children: [],
-          },
-          {
-            name: "roles",
-            children: [],
-          },
-          {
-            name: "permissions",
-            children: [],
-          },
-        ],
-      },
-      {
-        name: "settings",
-        children: [],
-      },
-    ],
-  },
-];
 
-const createFolders = (route) => {
-  const { name, children } = route;
-  const path = `src/routes/${name}`;
-
-  createDirectory(path);
-
-  children.forEach((child) => {
-    createFolders({
-      name: `${name}/${child.name}`,
-      children: child.children,
-    });
-  });
-};
-
-const createFiles = (route) => {
-  const { name, children } = route;
-  const path = `src/routes/${name}`;
-
-  createFile(`${path}/+layout.svelte`, "");
-  createFile(`${path}/+page.svelte`, "");
-
-  children.forEach((child) => {
-    createFiles({
-      name: `${name}/${child.name}`,
-      children: child.children,
-    });
-  });
-};
-
-createDirectory("src");
-createDirectory("src/routes");
-routes.forEach((route) => {
-  createFolders(route);
-});
-routes.forEach((route) => {
-  createFiles(route);
-});

@@ -7,6 +7,7 @@ import prompts from "prompts";
 import { spawn } from "child_process";
 import { create } from 'create-svelte';
 // import { setupTailwind } from "./modules/setup-tailwind.js";
+import { layoutSaas } from './layout/saas.js';
 
 const { version } = JSON.parse(
   fs.readFileSync( new URL( "../package.json", import.meta.url ), "utf-8" )
@@ -256,42 +257,18 @@ const { version } = JSON.parse(
   //   console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS done!" ) );
   // }
 
-  const { layoutGroups } = await prompts( {
+  const { layoutSaas } = await prompts( {
     type: "confirm",
-    name: "layoutGroups",
+    name: "layoutSaas",
     message: "Do you want to set up groups for advanced layouts?",
     initial: true,
   } );
 
-  if ( layoutGroups ) {
-    console.log( `` );
-    console.log( kleur.yellow( "Setting up groups..." ) );
-    // await runCommand( `${ packageManager } install svelte-group` );
-    fs.mkdirSync( "src/routes/(app)" );
-    fs.mkdirSync( "src/routes/(app)/about" );
-    fs.mkdirSync( "src/routes/(app)/contact" );
-    fs.mkdirSync( "src/routes/(app)/dashboard" );
-    fs.writeFileSync( "src/routes/(app)/dashboard/+page.svelte", "" );
-    fs.mkdirSync( "src/routes/admin" );
-    fs.writeFileSync( "src/routes/admin/+page@.svelte", "" );
-    fs.writeFileSync( "src/routes/admin/+layout.svelte", "" );
-    fs.writeFileSync( "src/routes/+layout.svelte", "" );
-    fs.mkdirSync( "src/routes/(auth)" );
-    fs.mkdirSync( "src/routes/(auth)/auth" );
-    fs.mkdirSync( "src/routes/(auth)/auth/signin" );
-    fs.mkdirSync( "src/routes/(auth)/auth/signup" );
-    fs.writeFileSync( "src/routes/(app)/about/+page.svelte", "" );
-    fs.writeFileSync( "src/routes/(app)/contact/+page.svelte", "" );
-    fs.writeFileSync( "src/routes/(app)/dashboard/+page.svelte", "" );
-    fs.writeFileSync( "src/routes/(auth)/auth/signin/+page.svelte", "" );
-    fs.writeFileSync( "src/routes/(auth)/auth/signup/+page.svelte", "" );
-    fs.writeFileSync( "src/routes/(auth)/auth/+layout.svelte", "" );
-    fs.writeFileSync( "src/routes/(auth)/+layout.svelte", "" );
-
-    console.log( `Moving +page.svelte to( app ) group...` );
-    fs.renameSync( "src/routes/+page.svelte", "src/routes/(app)/+page.svelte" );
-    console.log( `` );
+  if ( layoutSaas ) {
+    layoutSaas();
   }
+
+  console.log( kleur.green( "√" ), kleur.yellow( "Setting up groups..." ) );
 
   console.log( `This is it! I had great fun giving you a fresh start` );
 
