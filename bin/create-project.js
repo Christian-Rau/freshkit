@@ -166,8 +166,6 @@ let projectName; // declare the variable outside the function so it can be used 
     )
   }
 
-  console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS is installed and setup!" ) );
-
   const { layoutSaas } = await prompts( {
     type: "confirm",
     name: "layoutSaas",
