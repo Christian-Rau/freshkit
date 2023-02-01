@@ -30,13 +30,12 @@ export async function setupTailwind( packageManager ) {
   // await spawn( "npx tailwindcss init tailwind.config.cjs -p" );
 
   await runCommand( `npx tailwindcss init tailwind.config.cjs -p` );
-  console.log( "tailwind.config.cjs created!" );
 
 
   // install tailwindcss forms
-  await runCommand( `${ command } @tailwindcss/forms @tailwindcss/typography` );
+  // await runCommand( `${ command } @tailwindcss/forms @tailwindcss/typography` );
   // install tailwindcss typography
-  await runCommand( `${ command } @tailwindcss/typography` );
+  // await runCommand( `${ command } @tailwindcss/typography` );
 
 
   try {
