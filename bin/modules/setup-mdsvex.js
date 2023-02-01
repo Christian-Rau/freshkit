@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 export async function setupTailwind( packageManager ) {
 
   const dependencies = "tailwindcss postcss autoprefixer";

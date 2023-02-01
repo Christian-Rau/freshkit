@@ -10,29 +10,15 @@ const writeFile = promisify( fs.writeFile );
 const dependencies = 'tailwindcss postcss autoprefixer';
 
 export async function setupTailwind( packageManager ) {
-  let command;
-  switch ( packageManager ) {
-    case "pnpm":
-      command = "pnpm install --save-dev";
-      break;
-    case "npm":
-      command = "npm install --save-dev";
-      break;
-    case "yarn":
-      command = "yarn add --dev";
-      break;
-    default:
-      throw new Error( "Invalid package manager" );
-  }
+  await runCommand( `${ packageManager === "pnpm" ? "pnpm install" : packageManager === "npm" ? "npm install --save-dev" : "yarn add --dev" } ${ dependencies }` );
+  // rest of the code
 
-  await runCommand( `${ command } ${ dependencies }` );
-
-  await spawn( "npx tailwindcss init tailwind.config.cjs -p" );
-  console.log( "" );
+  await spawn( 'npx tailwindcss init tailwind.config.cjs -p' );
+  console.log( '' );
 
   try {
     // Create the file if it does not exist
-    const fd1 = await open( "tailwind.config.cjs", "w" );
+    const fd1 = await open( 'tailwind.config.cjs', 'w' );
 
     // Write to the file
     await writeFile( fd1, `
@@ -50,10 +36,10 @@ export async function setupTailwind( packageManager ) {
     const fd2 = await open( 'src/app.css', 'w' );
     // Write to the file
     await writeFile( fd2, `
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    ` );
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  ` );
 
     // Create a ./src/routes/+layout.svelte file and import the newly-created app.css file.
     const fd3 = await open( 'src/routes/+layout.svelte', 'w' );
@@ -85,10 +71,10 @@ export async function setupTailwind( packageManager ) {
             for more information. Thank you for using FreshKit, or check out the
             <a href="https://github.com/Christian-Rau/freshkit/issues">README</a>
             for more information.
-        </p>
-      </div>
-    </div>
-    ` );
+            </p>
+            </div>
+            </div>
+            ` );
     await close( fd1 );
     await close( fd2 );
     await close( fd3 );

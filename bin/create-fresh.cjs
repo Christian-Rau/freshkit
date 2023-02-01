@@ -1,20 +1,15 @@
 #!/usr/bin/env node
-import fs from "fs";
-import { openSync, writeFileSync, promises } from 'fs';
-import kleur from "kleur";
-import path from "path";
-import prompts from "prompts";
-import { spawn } from "child_process";
-import { create } from 'create-svelte';
-import { setupTailwind } from "./modules/setup-tailwind.js";
-// import { setupTailwind } from "./modules/setup-tailwind.js";
-// import { layoutSaas } from './project_structure/saas.js';
+const fs = require( "fs" );
+const kleur = require( "kleur" );
+const path = require( "path" );
+const prompts = require( "prompts" );
+const { spawn } = require( "child_process" );
+const create = require( 'create-svelte' );
+const setupTailwind = require( "./modules/setup-tailwind" );
 
-const { version } = JSON.parse(
-  fs.readFileSync( new URL( "../package.json", import.meta.url ), "utf-8" )
-);
-
-let projectName; // declare the variable outside the function so it can be used in the function below that changes directory
+// specifying the correct path for package.json
+const packageJsonPath = path.join( __dirname, '..', 'package.json' );
+const { version } = JSON.parse( fs.readFileSync( packageJsonPath, 'utf-8' ) );
 
 ( async () => {
   console.log( kleur.gray( `\nFreshKit version ${ version }` ) );
@@ -23,16 +18,13 @@ let projectName; // declare the variable outside the function so it can be used 
   console.log( kleur.yellow( `` ) );
 
   async function promptOptions() {
-    const response = await prompts( {
+    const { projectName } = await prompts( {
       type: "text",
       name: "projectName",
       message: "What is the name/directory of your project?\n  (leave blank to use current directory)",
     }, {
       onCancel: () => process.exit()
     } );
-    projectName = response.projectName;
-
-    console.log( projectName );
 
     const { types } = await prompts( {
       type: "select",
@@ -98,9 +90,10 @@ let projectName; // declare the variable outside the function so it can be used 
       onCancel: () => process.exit()
     } );
 
+    //pass the user input to the create function
     await create( projectName, {
       name: projectName,
-      template: 'skeleton', // or 'skeleton' or 'skeletonlib'
+      template: 'skeleton',
       types: types,
       prettier: prettier,
       eslint: eslint,
@@ -109,14 +102,13 @@ let projectName; // declare the variable outside the function so it can be used 
     } );
 
   }
-  await promptOptions();
 
   process.on( 'SIGINT', () => {
     console.log( '\nCancelled' );
     process.exit();
   } );
 
-
+  await promptOptions();
 
   const { packageManager } = await prompts( {
     type: "select",
@@ -158,12 +150,8 @@ let projectName; // declare the variable outside the function so it can be used 
   } );
 
   // useTailwind = true; run the command with the chosen package manager to install the packages
-
   if ( useTailwind ) {
-    setupTailwind( packageManager
-      ? packageManager
-      : "npm"
-    )
+    setupTailwind( packageManager )
   }
 
   console.log( kleur.green( "√" ), kleur.yellow( "Tailwind CSS is installed and setup!" ) );
