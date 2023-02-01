@@ -60,8 +60,9 @@ export async function setupTailwind( packageManager ) {
     // Write to the file
     await writeFile( fd3, `
     <script>
-    import '../app.css';
+      import '../app.css';
     </script>
+    
     <slot />
     ` );
     // Edit the +page.svelte with new tailwind classes
