@@ -27,8 +27,17 @@ export async function setupTailwind( packageManager ) {
 
   await runCommand( `${ command } ${ dependencies }` );
 
-  await spawn( "npx tailwindcss init tailwind.config.cjs -p" );
-  console.log( "" );
+  // await spawn( "npx tailwindcss init tailwind.config.cjs -p" );
+
+  await runCommand( `npx tailwindcss init tailwind.config.cjs -p` );
+  console.log( "tailwind.config.cjs created!" );
+
+
+  // install tailwindcss forms
+  await runCommand( `${ command } @tailwindcss/forms @tailwindcss/typography` );
+  // install tailwindcss typography
+  await runCommand( `${ command } @tailwindcss/typography` );
+
 
   try {
     // Create the file if it does not exist
@@ -46,8 +55,15 @@ export async function setupTailwind( packageManager ) {
       plugins: []
     };
     ` );
+
+    console.log( "tailwind.config.cjs edited!" );
+    console.log( "." );
+
     // create a ./src/app.css file
     const fd2 = await open( 'src/app.css', 'w' );
+    console.log( "src/app.css created!" );
+    console.log( "." );
+
     // Write to the file
     await writeFile( fd2, `
     @tailwind base;
@@ -57,16 +73,25 @@ export async function setupTailwind( packageManager ) {
 
     // Create a ./src/routes/+layout.svelte file and import the newly-created app.css file.
     const fd3 = await open( 'src/routes/+layout.svelte', 'w' );
+    console.log( "src/routes/+layout.svelte created!" );
+    console.log( "." );
     // Write to the file
     await writeFile( fd3, `
     <script>
       import '../app.css';
     </script>
-    
+
     <slot />
     ` );
+
+    console.log( "src/routes/+layout.svelte edited!" );
+
     // Edit the +page.svelte with new tailwind classes
     const fd4 = await open( 'src/routes/+page.svelte', 'w' );
+
+    console.log( "src/routes/+page.svelte edited!" );
+    console.log( "." );
+
     // Write to the file
     await writeFile( fd4, `
     <div class="flex h-screen justify-center items-center">
@@ -90,6 +115,10 @@ export async function setupTailwind( packageManager ) {
       </div>
     </div>
     ` );
+
+    console.log( "src/routes/+page.svelte edited!" );
+    console.log( "." );
+
     await close( fd1 );
     await close( fd2 );
     await close( fd3 );
